@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/spinners/static/css/main.65a49a9b.chunk.css",
+    "main.js": "/spinners/static/js/main.cb93f3c6.chunk.js",
+    "main.js.map": "/spinners/static/js/main.cb93f3c6.chunk.js.map",
+    "runtime-main.js": "/spinners/static/js/runtime-main.f51ff446.js",
+    "runtime-main.js.map": "/spinners/static/js/runtime-main.f51ff446.js.map",
+    "static/js/2.f0240e43.chunk.js": "/spinners/static/js/2.f0240e43.chunk.js",
+    "static/js/2.f0240e43.chunk.js.map": "/spinners/static/js/2.f0240e43.chunk.js.map",
+    "index.html": "/spinners/index.html",
+    "precache-manifest.c780fa6bc299d74b5b0883b028422b27.js": "/spinners/precache-manifest.c780fa6bc299d74b5b0883b028422b27.js",
+    "service-worker.js": "/spinners/service-worker.js",
+    "static/css/main.65a49a9b.chunk.css.map": "/spinners/static/css/main.65a49a9b.chunk.css.map",
+    "static/js/2.f0240e43.chunk.js.LICENSE.txt": "/spinners/static/js/2.f0240e43.chunk.js.LICENSE.txt",
+    "static/media/fb.c829928a.svg": "/spinners/static/media/fb.c829928a.svg",
+    "static/media/github-logo.dd86b04e.svg": "/spinners/static/media/github-logo.dd86b04e.svg",
+    "static/media/github.5500f945.svg": "/spinners/static/media/github.5500f945.svg",
+    "static/media/in.b0d6c0ce.svg": "/spinners/static/media/in.b0d6c0ce.svg",
+    "static/media/logo.1a330a4d.svg": "/spinners/static/media/logo.1a330a4d.svg",
+    "static/media/tw.be28f372.svg": "/spinners/static/media/tw.be28f372.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f51ff446.js",
+    "static/js/2.f0240e43.chunk.js",
+    "static/css/main.65a49a9b.chunk.css",
+    "static/js/main.cb93f3c6.chunk.js"
+  ]
+}
