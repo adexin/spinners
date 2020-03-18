@@ -10641,10 +10641,10 @@ spdy@^4.0.1:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
-spinners-react@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/spinners-react/-/spinners-react-1.0.2.tgz#2df05c312d850762b456c40ba8600bd46b8ce495"
-  integrity sha512-igsLOkeG1EcbBGPxFKNspvTPrm39BBk3GHeMldvP8MqRf2ZEV8IxtWe/PB3rXxzLXDdULp8O/5ps7DT1ZPiBew==
+spinners-react@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/spinners-react/-/spinners-react-1.0.3.tgz#2e8453755a6f48f5da0c2682bf39f4b11577c02d"
+  integrity sha512-FLlqSBojl6pEJNF/4LjNHcfuvx28ert8vbY0oEpE3NpjQVq/JscvggyeoAEdS2D+mq6kXiSx3mkt3YVAnFUCuw==
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
