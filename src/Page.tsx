@@ -141,6 +141,7 @@ const Page = (props: PageProps) => {
   `;
 
   useEffect(() => setStill(false), [debouncedSpeed]);
+  useEffect(() => setColor(colors.primary), [colors.primary]);
 
   return (
     <div
