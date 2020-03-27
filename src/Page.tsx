@@ -205,10 +205,10 @@ const Page = (props: PageProps) => {
               border-radius: 6px;
             `}
           >
-            <Link css={tabIndex == 0 ? activeTabCss : tabCss} to="/">
+            <Link css={tabIndex === 0 ? activeTabCss : tabCss} to="/">
               <ReactLogo width="40px" />
             </Link>
-            <Link css={tabIndex == 1 ? activeTabCss : tabCss} to="/angular">
+            <Link css={tabIndex === 1 ? activeTabCss : tabCss} to="/angular">
               <AngularLogo width="35px" />
             </Link>
           </nav>
