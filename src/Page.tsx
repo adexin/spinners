@@ -21,9 +21,6 @@ import { ReactComponent as ReactLogo } from './images/react.svg';
 import { ReactComponent as Twitter } from './images/tw.svg';
 
 export type PageProps = {
-  tabIndex: number,
-  spinners: { [key: string]: any },
-  name: string,
   colors: {
     bg: CSSProperties['background'],
     secondaryBg: CSSProperties['color'],
@@ -39,15 +36,22 @@ export type PageProps = {
       border: CSSProperties['color'],
     },
   },
+  name: string,
   Scripts: React.FC,
+  spinners: { [key: string]: any },
+  styles: {
+    tabs: string[],
+  },
+  tabIndex: number,
 }
 
 const Page = (props: PageProps) => {
   const {
     colors,
+    name,
+    styles,
     Scripts,
     spinners,
-    name,
     tabIndex
   } = props;
   const [size, setSize] = useState<number>(50);
@@ -207,10 +211,10 @@ const Page = (props: PageProps) => {
             `}
           >
             <Link css={tabIndex === 0 ? activeTabCss : tabCss} to="/">
-              <ReactLogo width="40px" />
+              <ReactLogo css={css`${styles.tabs[0]}`} width="40px" />
             </Link>
             <Link css={tabIndex === 1 ? activeTabCss : tabCss} to="/angular">
-              <AngularLogo width="35px" />
+              <AngularLogo css={css`${styles.tabs[1]}`} width="35px" />
             </Link>
           </nav>
           <div>

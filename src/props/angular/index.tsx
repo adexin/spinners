@@ -30,6 +30,16 @@ export const colors = {
   },
 }
 
+export const styles = {
+  tabs: [
+    `color: #434343;`,
+    `
+      color: ${colors.bg};
+      .angular0 { fill: ${colors.primary}; }
+    `,
+  ],
+}
+
 // export const spinners = {
 //   'sa-spinner-circular': 'sa-spinner-circular',
 //   'sa-spinner-circular-fixed': 'sa-spinner-circular-fixed',

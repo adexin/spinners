@@ -28,6 +28,16 @@ export const colors = {
   },
 }
 
+export const styles = {
+  tabs: [
+    `color: #61dafb;`,
+    `
+      color: ${colors.bg};
+      .angular0 { fill: #686868; }
+    `,
+  ],
+}
+
 export const spinners = {
   SpinnerCircular,
   SpinnerCircularFixed,
