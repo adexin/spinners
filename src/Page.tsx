@@ -228,7 +228,7 @@ const Page = (props: PageProps) => {
               created by 
             </span>
             <a css={linkCss} rel="noopener noreferrer" target="_blank" href="https://adexin.com">
-              <Logo css={css`color: ${colors.text};`} width="200px" />
+              <Logo css={css`color: ${colors.text};`} width="182px" />
             </a>
           </div>
         </div>
