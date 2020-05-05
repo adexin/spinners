@@ -4,11 +4,6 @@ import { Alpha } from 'react-color/lib/components/common';
 import { css, jsx } from '@emotion/core';
 import { pointer } from './pointer';
 
-
-
-
-
-
 const AlphaSlider = CustomPicker(({ rgb, hsl, onChange }) => {
   return (
     <div
