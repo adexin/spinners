@@ -15,8 +15,9 @@ import {
   SpinnerRound,
   SpinnerRoundOutlined,
   SpinnerRoundFilled,
-  SpinnerRomb,
+  SpinnerDiamond,
 } from '@adexin/spinners-react';
+
 import { css, jsx } from '@emotion/core';
 import Slider from '@material-ui/core/Slider';
 
@@ -99,7 +100,7 @@ const spinners = [
   SpinnerRoundFilled,
   SpinnerDotted,
   SpinnerInfinity,
-  SpinnerRomb
+  SpinnerDiamond
 ];
 
 const spinnerNames = [
@@ -111,13 +112,14 @@ const spinnerNames = [
   'SpinnerRoundFilled',
   'SpinnerDotted',
   'SpinnerInfinity',
-  'SpinnerRomb'
+  'SpinnerDiamond'
 ];
 
 const App: React.FC = () => {
   const [size, setSize] = useState<number>(50);
   const [thickness, setThickness] = useState<number>(100);
   const [color, setColor] = useState('#38ad48');
+  const [secondarycolor, setSecondarycolor] = useState('#38ad48');
   const [speed, setSpeed] = useState(100);
   const [selected, setSelected] = useState(0);
   const [still, setStill] = useState(false);
@@ -277,7 +279,7 @@ const App: React.FC = () => {
                 }
               `}
               >
-                <Spinner still={still} color={color} size={size} speed={debouncedSpeed} thickness={thickness} />
+                <Spinner secondaryColor={secondarycolor} still={still} color={color} size={size} speed={debouncedSpeed} thickness={thickness} />
               </div>
             </a>
           ))}
@@ -420,6 +422,50 @@ const App: React.FC = () => {
                   font-weight: 600;
                 `}
               >
+                Back Color -
+                {' '}
+                <span
+                  css={css`
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                    background: ${secondarycolor};
+                    display: inline-block;
+                    vertical-align: middle;
+                  `}
+                >
+                </span>
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 32px 0;
+                `}
+              >
+                <ColorSlider
+                  color={secondarycolor}
+                  onChange={secondarycolor =>  setSecondarycolor(secondarycolor.hex)}
+                />
+              </div>
+            </div>
+            <div
+              css={css`
+                background: #282828;
+                display: flex;
+                align-items: center;
+                padding: 0 42px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+              `}
+            >
+              <div
+                css={css`
+                  width: 192px;
+                  flex-shrink: 0;
+                  font-size: 18px;
+                  font-weight: 600;
+                `}
+              >
                 Speed - {speed} %
               </div>
               <div css={css`width: 100%;`}>
@@ -442,7 +488,7 @@ const App: React.FC = () => {
           <div>
             <textarea
               ref={textareaRef}
-              value={`<${spinnerNames[selected]} color="${color}" size={${size}} speed={${speed}} thickness={${thickness}} />`}
+              value={`<${spinnerNames[selected]} color="${color}" secondaryColor={${secondarycolor}} size={${size}} speed={${speed}} thickness={${thickness}} />`}
               readOnly
               css={css`
                 resize: none;
