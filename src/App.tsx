@@ -22,6 +22,7 @@ import { css, jsx } from '@emotion/core';
 import Slider from '@material-ui/core/Slider';
 
 import ColorSlider from './ColorSlider';
+import AlphaSlider from './AlphaSlider';
 import useDebounce from './useDebounce';
 import { ReactComponent as Facebook } from './images/fb.svg';
 import { ReactComponent as GithubLogo } from './images/github-logo.svg';
@@ -29,6 +30,7 @@ import { ReactComponent as GithubText } from './images/github.svg';
 import { ReactComponent as Linkedin } from './images/in.svg';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as Twitter } from './images/tw.svg';
+import { RGBColor } from 'react-color';
 
 const shareUrl = 'https://adexin.github.io/spinners/?shared';
 const linkCss = css`
@@ -118,8 +120,8 @@ const spinnerNames = [
 const App: React.FC = () => {
   const [size, setSize] = useState<number>(50);
   const [thickness, setThickness] = useState<number>(100);
-  const [color, setColor] = useState('#38ad48');
-  const [secondarycolor, setSecondarycolor] = useState('#38ad48');
+  const [color, setColor] = useState<RGBColor>({r: 56, g: 173, b: 72, a: 1});
+  const [secondarycolor, setSecondarycolor] = useState<RGBColor>({r: 53, g: 74, b: 116, a: 0.44});
   const [speed, setSpeed] = useState(100);
   const [selected, setSelected] = useState(0);
   const [still, setStill] = useState(false);
@@ -127,6 +129,9 @@ const App: React.FC = () => {
   const debouncedSpeed = useDebounce(speed, 300);
 
   useEffect(() => setStill(false), [debouncedSpeed]);
+
+  const colorRgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+  const secondarycolorRgba = `rgba(${secondarycolor.r}, ${secondarycolor.g}, ${secondarycolor.b}, ${secondarycolor.a})`;
 
   return (
     <div
@@ -279,7 +284,7 @@ const App: React.FC = () => {
                 }
               `}
               >
-                <Spinner secondaryColor={secondarycolor} still={still} color={color} size={size} speed={debouncedSpeed} thickness={thickness} />
+                <Spinner secondaryColor={secondarycolorRgba} still={still} color={colorRgba} size={size} speed={debouncedSpeed} thickness={thickness} />
               </div>
             </a>
           ))}
@@ -360,94 +365,7 @@ const App: React.FC = () => {
                 />
               </div>
             </div>
-            <div
-              css={css`
-                background: #282828;
-                display: flex;
-                align-items: center;
-                padding: 0 42px;
-                border-radius: 15px;
-                margin-bottom: 10px;
-              `}
-            >
-              <div
-                css={css`
-                  width: 192px;
-                  flex-shrink: 0;
-                  font-size: 18px;
-                  font-weight: 600;
-                `}
-              >
-                Color -
-                {' '}
-                <span
-                  css={css`
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 6px;
-                    background: ${color};
-                    display: inline-block;
-                    vertical-align: middle;
-                  `}
-                >
-                </span>
-              </div>
-              <div
-                css={css`
-                  width: 100%;
-                  padding: 32px 0;
-                `}
-              >
-                <ColorSlider
-                  color={color}
-                  onChange={color => setColor(color.hex)}
-                />
-              </div>
-            </div>
-            <div
-              css={css`
-                background: #282828;
-                display: flex;
-                align-items: center;
-                padding: 0 42px;
-                border-radius: 15px;
-                margin-bottom: 10px;
-              `}
-            >
-              <div
-                css={css`
-                  width: 192px;
-                  flex-shrink: 0;
-                  font-size: 18px;
-                  font-weight: 600;
-                `}
-              >
-                Back Color -
-                {' '}
-                <span
-                  css={css`
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 6px;
-                    background: ${secondarycolor};
-                    display: inline-block;
-                    vertical-align: middle;
-                  `}
-                >
-                </span>
-              </div>
-              <div
-                css={css`
-                  width: 100%;
-                  padding: 32px 0;
-                `}
-              >
-                <ColorSlider
-                  color={secondarycolor}
-                  onChange={secondarycolor =>  setSecondarycolor(secondarycolor.hex)}
-                />
-              </div>
-            </div>
+
             <div
               css={css`
                 background: #282828;
@@ -484,11 +402,129 @@ const App: React.FC = () => {
                 />
               </div>
             </div>
+
+            <div
+              css={css`
+                background: #282828;
+                display: flex;
+                align-items: center;
+                padding: 0 42px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+              `}
+            >
+              <div
+                css={css`
+                  width: 192px;
+                  flex-shrink: 0;
+                  font-size: 18px;
+                  font-weight: 600;
+                `}
+              >
+                Color -
+                {' '}
+                <span
+                  css={css`
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                    background: ${colorRgba};
+                    display: inline-block;
+                    vertical-align: middle;
+                  `}
+                >
+                </span>
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 20px 0;
+                `}
+              >
+                <ColorSlider
+                  color={colorRgba}
+                  onChange={color => setColor(color.rgb) }
+                />
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 16px 0 0 0;
+                `}
+              >
+                <AlphaSlider
+                  color={colorRgba}
+                  onChange={color => setColor(color.rgb)}
+                />
+                </div>
+              </div>
+            </div>
+
+            <div
+              css={css`
+                background: #282828;
+                display: flex;
+                align-items: center;
+                padding: 0 42px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+              `}
+            >
+              <div
+                css={css`
+                  width: 192px;
+                  flex-shrink: 0;
+                  font-size: 18px;
+                  font-weight: 600;
+                `}
+              >
+                Color 2-
+                {' '}
+                <span
+                  css={css`
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                    background: ${secondarycolorRgba};
+                    display: inline-block;
+                    vertical-align: middle;
+                  `}
+                >
+                </span>
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 20px 0;
+                `}
+              >
+                <ColorSlider
+                  color={secondarycolorRgba}
+                  onChange={color =>  
+                    {
+                      console.log(color.rgb)
+                      secondarycolor !== color.rgb && setSecondarycolor(color.rgb);                      
+                    }
+                    }
+                />
+                <div
+                css={css`
+                  width: 100%;
+                  padding: 16px 0 0 0;
+                `}
+              >
+                <AlphaSlider
+                  color={secondarycolorRgba}
+                  onChange={color => setSecondarycolor(color.rgb)}
+                />
+                </div>
+              </div>
+            </div>
+            
           </div>
           <div>
             <textarea
               ref={textareaRef}
-              value={`<${spinnerNames[selected]} color="${color}" secondaryColor={${secondarycolor}} size={${size}} speed={${speed}} thickness={${thickness}} />`}
+              value={`<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}" secondaryColor="${secondarycolorRgba}"/>`}
               readOnly
               css={css`
                 resize: none;
