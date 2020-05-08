@@ -16,7 +16,7 @@ import {
   SpinnerRoundOutlined,
   SpinnerRoundFilled,
   SpinnerRomb,
-} from '@adexin/spinners-react';
+} from 'spinners-react';
 import { css, jsx } from '@emotion/core';
 import Slider from '@material-ui/core/Slider';
 
