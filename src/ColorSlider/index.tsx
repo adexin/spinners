@@ -14,7 +14,7 @@ const ColorSlider = CustomPicker(({ hsl, onChange }) => {
         & .hue-horizontal {
           border-radius: 5px;
           padding: 0 !important;
-          margin: 0 3px;
+          margin: 0px -2px 0 3px !important;
         }
 
         & .hue-horizontal > div {

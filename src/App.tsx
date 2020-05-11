@@ -57,7 +57,7 @@ const sliderThumbCss = css`
 const sliderCss = css`
   &.MuiSlider-root {
     color: #fff;
-    margin: 18px 0;
+    margin: 18px 3px;
   }
 
   & .MuiSlider-rail {
