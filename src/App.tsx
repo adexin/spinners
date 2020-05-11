@@ -139,6 +139,19 @@ const App: React.FC = () => {
   const secondaryColorRgba = `rgba(${secondaryColor.r}, ${secondaryColor.g}, ${secondaryColor.b}, ${secondaryColor.a})`;
   const tempSecondaryColorRgba = `rgba(${tempSecondaryColor.r}, ${tempSecondaryColor.g}, ${tempSecondaryColor.b}, ${secondaryColor.a})`;
 
+  let textareaSpinner = '';
+  switch (spinnerNames[selected]) {
+    case 'SpinnerCircular':
+    case 'SpinnerCircularFixed':
+    case 'SpinnerCircularSplit':
+    case 'SpinnerInfinity':
+    case 'SpinnerDiamond':
+      textareaSpinner = `<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}" secondaryColor="${secondaryColorRgba}"/>`;
+        break;
+    default:
+      textareaSpinner = `<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}"/>`;
+  }
+  
   return (
     <div
       css={css`
@@ -450,9 +463,7 @@ const App: React.FC = () => {
                     text-align: center;
                   `}
                 >-</span> 
-                {' '}
-
-                
+                {' '}                
                 <span onClick={ () => setDisplayColor(true) }
                   css={css`
                     width: 30px;
@@ -575,8 +586,7 @@ const App: React.FC = () => {
                   width: 100%;
                   padding: 20px 0;
                 `}
-              >
-                
+              >       
             
                 <ColorSlider
                   color={tempSecondaryColorRgba}               
@@ -605,7 +615,7 @@ const App: React.FC = () => {
           <div>
             <textarea
               ref={textareaRef}
-              value={`<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}" secondaryColor="${secondaryColorRgba}"/>`}
+              value={ textareaSpinner }
               readOnly
               css={css`
                 resize: none;
