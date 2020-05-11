@@ -31,7 +31,8 @@ import { ReactComponent as GithubText } from './images/github.svg';
 import { ReactComponent as Linkedin } from './images/in.svg';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as Twitter } from './images/tw.svg';
-import { RGBColor } from 'react-color';
+import { RGBColor, MaterialPicker } from 'react-color';
+
 
 const shareUrl = 'https://adexin.github.io/spinners/?shared';
 const linkCss = css`
@@ -122,17 +123,21 @@ const App: React.FC = () => {
   const [size, setSize] = useState<number>(50);
   const [thickness, setThickness] = useState<number>(100);
   const [color, setColor] = useState<RGBColor>({r: 56, g: 173, b: 72, a: 1});
-  const [secondarycolor, setSecondarycolor] = useState<RGBColor>({r: 53, g: 74, b: 116, a: 0.44});
+  const [secondaryColor, setSecondaryColor] = useState<RGBColor>({r: 0, g: 0, b: 0, a: 0.44});
+  const [tempSecondaryColor, setTempSecondaryColor] = useState<RGBColor>({r: 56, g: 173, b: 72, a: 0.44});
   const [speed, setSpeed] = useState(100);
   const [selected, setSelected] = useState(0);
   const [still, setStill] = useState(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
   const debouncedSpeed = useDebounce(speed, 300);
+  const [displayColor, setDisplayColor] = useState(false);
+  const [displaySecondaryColor, setDisplaySecondaryColor] = useState(false);
 
   useEffect(() => setStill(false), [debouncedSpeed]);
 
   const colorRgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-  const secondarycolorRgba = `rgba(${secondarycolor.r}, ${secondarycolor.g}, ${secondarycolor.b}, ${secondarycolor.a})`;
+  const secondaryColorRgba = `rgba(${secondaryColor.r}, ${secondaryColor.g}, ${secondaryColor.b}, ${secondaryColor.a})`;
+  const tempSecondaryColorRgba = `rgba(${tempSecondaryColor.r}, ${tempSecondaryColor.g}, ${tempSecondaryColor.b}, ${secondaryColor.a})`;
 
   return (
     <div
@@ -252,8 +257,22 @@ const App: React.FC = () => {
             }
           `}
         >
-          {spinners.map((Spinner, i) => (
-            <a
+          {spinners.map((Spinner, i) => {
+            let spinnerElement = null;
+
+            switch (spinnerNames[i]) {
+              case 'SpinnerCircular':
+              case 'SpinnerCircularFixed':
+              case 'SpinnerCircularSplit':
+              case 'SpinnerInfinity':
+              case 'SpinnerDiamond':
+                spinnerElement = <Spinner secondaryColor={secondaryColorRgba} still={still} color={colorRgba} size={size} speed={debouncedSpeed} thickness={thickness} />
+                  break;
+              default:
+                spinnerElement = <Spinner still={still} color={colorRgba} size={size} speed={debouncedSpeed} thickness={thickness} />
+            }
+            
+            return <a
               key={i}
               href={`#${spinnerNames[i]}`}
               css={css`
@@ -285,10 +304,10 @@ const App: React.FC = () => {
                 }
               `}
               >
-                <Spinner secondaryColor={secondarycolorRgba} still={still} color={colorRgba} size={size} speed={debouncedSpeed} thickness={thickness} />
+               {spinnerElement} 
               </div>
             </a>
-          ))}
+            })}
         </div>
         <div
           css={css`
@@ -422,9 +441,19 @@ const App: React.FC = () => {
                   font-weight: 600;
                 `}
               >
-                Color -
-                {' '}
+                Color 
                 <span
+                  css={css`
+                    width: 25px;                    
+                    border-radius: 6px;                    
+                    display: inline-block;
+                    text-align: center;
+                  `}
+                >-</span> 
+                {' '}
+
+                
+                <span onClick={ () => setDisplayColor(true) }
                   css={css`
                     width: 30px;
                     height: 30px;
@@ -435,6 +464,28 @@ const App: React.FC = () => {
                   `}
                 >
                 </span>
+                { displayColor ? <div 
+                    css={css`
+                    position: absolute;
+                    zIndex: 2;
+                  `}
+                  >
+                <div css={css`
+                    position: fixed;
+                    top: 0px;
+                    right: 0px;
+                    bottom: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                  `}
+                onClick={ () => setDisplayColor(false) }
+                />
+                <MaterialPicker 
+                color={colorRgba}
+                onChange={color => setColor(color.rgb) }
+                />
+              </div> : null }
               </div>
               <div
                 css={css`
@@ -449,7 +500,7 @@ const App: React.FC = () => {
               <div
                 css={css`
                   width: 100%;
-                  padding: 16px 0 0 0;
+                  padding: 20px 0 0 0;
                 `}
               >
                 <AlphaSlider
@@ -478,19 +529,46 @@ const App: React.FC = () => {
                   font-weight: 600;
                 `}
               >
-                Color 2-
+                Color 2 -
                 {' '}
-                <span
+                <span onClick={ () => setDisplaySecondaryColor(true) }
                   css={css`
                     width: 30px;
                     height: 30px;
                     border-radius: 6px;
-                    background: ${secondarycolorRgba};
+                    background: ${secondaryColorRgba};
                     display: inline-block;
                     vertical-align: middle;
                   `}
                 >
                 </span>
+                { displaySecondaryColor ? <div 
+                    css={css`
+                    position: absolute;
+                    zIndex: 2;
+                  `}
+                  >
+                <div css={css`
+                    position: fixed;
+                    top: 0px;
+                    right: 0px;
+                    bottom: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                  `}
+                onClick={ () => setDisplaySecondaryColor(false) }
+                />
+                <MaterialPicker 
+                  color={tempSecondaryColorRgba}               
+                  onChange={color =>  
+                    {                      
+                      setSecondaryColor(color.rgb);
+                      setTempSecondaryColor(color.rgb);                       
+                    }
+                    }
+                />
+              </div> : null }
               </div>
               <div
                 css={css`
@@ -498,24 +576,26 @@ const App: React.FC = () => {
                   padding: 20px 0;
                 `}
               >
+                
+            
                 <ColorSlider
-                  color={secondarycolorRgba}
+                  color={tempSecondaryColorRgba}               
                   onChange={color =>  
-                    {
-                      console.log(color.rgb)
-                      secondarycolor !== color.rgb && setSecondarycolor(color.rgb);                      
+                    {                      
+                      setSecondaryColor(color.rgb);
+                      setTempSecondaryColor(color.rgb);                       
                     }
                     }
                 />
                 <div
                 css={css`
                   width: 100%;
-                  padding: 16px 0 0 0;
+                  padding: 20px 0 0 0;
                 `}
               >
                 <AlphaSlider
-                  color={secondarycolorRgba}
-                  onChange={color => setSecondarycolor(color.rgb)}
+                  color={secondaryColorRgba}
+                  onChange={color => setSecondaryColor(color.rgb)}
                 />
                 </div>
               </div>
@@ -525,12 +605,12 @@ const App: React.FC = () => {
           <div>
             <textarea
               ref={textareaRef}
-              value={`<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}" secondaryColor="${secondarycolorRgba}"/>`}
+              value={`<${spinnerNames[selected]} size={${size}} thickness={${thickness}} speed={${speed}} color="${colorRgba}" secondaryColor="${secondaryColorRgba}"/>`}
               readOnly
               css={css`
                 resize: none;
                 width: 100%;
-                height: 171px;
+                height: 133px;
                 background: #282828;
                 border: 0;
                 border-radius: 15px;
