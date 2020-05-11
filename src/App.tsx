@@ -472,6 +472,7 @@ const App: React.FC = () => {
                     background: ${colorRgba};
                     display: inline-block;
                     vertical-align: middle;
+                    cursor: pointer;
                   `}
                 >
                 </span>
@@ -550,6 +551,7 @@ const App: React.FC = () => {
                     background: ${secondaryColorRgba};
                     display: inline-block;
                     vertical-align: middle;
+                    cursor: pointer;
                   `}
                 >
                 </span>
@@ -620,7 +622,7 @@ const App: React.FC = () => {
               css={css`
                 resize: none;
                 width: 100%;
-                height: 133px;
+                height: 127px;
                 background: #282828;
                 border: 0;
                 border-radius: 15px;
