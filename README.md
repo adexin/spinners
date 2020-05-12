@@ -4,7 +4,7 @@ Demo application of [Spinners React](https://github.com/adexin/spinners-react) c
 
 <p align="center">
   <a href="https://adexin.github.io/spinners/">
-	  <img src="https://i.imgur.com/8sVE0UI.gif" />
+	  <img src="https://i.imgur.com/wptjJiJ.gif" />
   </a>
 </p>
 
