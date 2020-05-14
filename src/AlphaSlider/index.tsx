@@ -13,7 +13,7 @@ const AlphaSlider = CustomPicker(({ rgb, hsl, onChange }) => {
         width: 100%;        
         & > div > div:nth-of-type(3){
           
-          margin: 0px -2px 0 3px !important;
+          margin: 0px -3px 0 3px !important;
         }
         `}
     >
