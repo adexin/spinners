@@ -10,9 +10,8 @@ const AlphaSlider = CustomPicker(({ rgb, hsl, onChange }) => {
       css={css`
         position: relative;
         height: 5px;
-        width: 100%;        
+        width: 100%;
         & > div > div:nth-of-type(3){
-          
           margin: 0px -3px 0 3px !important;
         }
         `}
@@ -21,7 +20,7 @@ const AlphaSlider = CustomPicker(({ rgb, hsl, onChange }) => {
         rgb={ rgb }
         hsl={ hsl }
         onChange={ onChange }
-        pointer={ pointer }       
+        pointer={ pointer }
       />
     </div>
   );

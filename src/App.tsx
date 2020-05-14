@@ -443,7 +443,7 @@ const App: React.FC = () => {
                 Color
                 <span
                   css={css`
-                    width: 25px;
+                    width: 24px;
                     border-radius: 6px;
                     display: inline-block;
                     text-align: center;

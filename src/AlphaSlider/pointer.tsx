@@ -13,7 +13,7 @@ export const pointer = () => {
           margin-left: -28px;
         }
       `}
-    />       
+    />
   )
 }
 
