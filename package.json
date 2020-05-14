@@ -14,7 +14,7 @@
     "react-dom": "^16.12.0",
     "react-scripts": "3.4.0",
     "react-share": "^4.0.1",
-    "spinners-react": "git://github.com/adexin/spinners-react.git#f56c3fdf1eb3762915d4e8c835d8cd3e774b6682",
+    "spinners-react": "^1.0.4",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx-development": "^7.9.0",
     "@types/react": "^16.9.17",
     "@types/react-color": "^2.17.3",
     "@types/react-dom": "^16.9.4"
