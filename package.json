@@ -14,7 +14,7 @@
     "react-dom": "^16.12.0",
     "react-scripts": "3.4.0",
     "react-share": "^4.0.1",
-    "spinners-react": "git://github.com/adexin/spinners-react.git#dafbe56e37e66aa328abda99c8221a11a02d8640",
+    "spinners-react": "git://github.com/adexin/spinners-react.git#f56c3fdf1eb3762915d4e8c835d8cd3e774b6682",
     "typescript": "~3.7.2"
   },
   "scripts": {
