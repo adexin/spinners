@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useEffect, CSSProperties } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import {
   FacebookShareButton,
@@ -7,8 +8,10 @@ import {
   LinkedinShareButton,
 } from 'react-share';
 import { css, jsx } from '@emotion/core';
+import { RGBColor, MaterialPicker } from 'react-color'
 import Slider from '@material-ui/core/Slider';
 
+import AlphaSlider from './AlphaSlider';
 import ColorSlider from './ColorSlider';
 import useDebounce from './useDebounce';
 import { ReactComponent as AngularLogo } from './images/angular.svg';
@@ -20,11 +23,13 @@ import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as ReactLogo } from './images/react.svg';
 import { ReactComponent as Twitter } from './images/tw.svg';
 
+
 export type PageProps = {
   colors: {
     bg: CSSProperties['background'],
     secondaryBg: CSSProperties['color'],
     secondaryBgVariant: CSSProperties['background'],
+    logoText: CSSProperties['color'],
     text: CSSProperties['color'],
     primary: CSSProperties['color'],
     slider: {
@@ -33,7 +38,9 @@ export type PageProps = {
     spinners: {
       bg: CSSProperties['background'],
       grid: CSSProperties['background'],
+      gridHover: CSSProperties['background'],
       border: CSSProperties['color'],
+      secondary: CSSProperties['color'],
     },
   },
   name: string,
@@ -41,9 +48,20 @@ export type PageProps = {
   spinners: { [key: string]: any },
   styles: {
     tabs: string[],
+    slider: {
+      legend: {
+        opacity: CSSProperties['opacity'],
+      },
+    },
+  },
+  hrefs: {
+    github: string,
   },
   tabIndex: number,
+  usageCode: Function,
 }
+
+const noSecondaryColorIndexes = [3, 4, 5, 6];
 
 const Page = (props: PageProps) => {
   const {
@@ -52,17 +70,25 @@ const Page = (props: PageProps) => {
     styles,
     Scripts,
     spinners,
-    tabIndex
+    hrefs,
+    tabIndex,
+    usageCode,
   } = props;
-  const [size, setSize] = useState<number>(50);
-  const [thickness, setThickness] = useState<number>(100);
+  const [size, setSize] = useState(50);
+  const [thickness, setThickness] = useState(100);
   const [color, setColor] = useState(colors.primary);
+  const [secondaryColor, setSecondaryColor] = useState(colors.spinners.secondary);
   const [speed, setSpeed] = useState(100);
   const [selected, setSelected] = useState(0);
   const [still, setStill] = useState(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
   const debouncedSpeed = useDebounce(speed, 300);
-  const shareUrl = 'https://adexin.github.io/spinners/?shared';
+  const colorToCss = (color: RGBColor) => `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+  const shareUrl = `${window.location.href}?shared`;
+  const [showMaterialPicker, setShowMaterialPicker] = useState(false);
+  const [showMaterialPicker2, setShowMaterialPicker2] = useState(false);
+  const isSpinnerWebComponent = name !== 'React';
+
   const linkCss = css`
     outline: none;
     text-decoration: none;
@@ -106,7 +132,7 @@ const Page = (props: PageProps) => {
   const sliderCss = css`
     &.MuiSlider-root {
       color: ${colors.text};
-      margin: 18px 0;
+      margin: 18px 3px;
     }
 
     & .MuiSlider-rail {
@@ -114,6 +140,7 @@ const Page = (props: PageProps) => {
       height: 5px;
       opacity: 1;
       background: ${colors.slider.track};
+      border-right: 1px solid ${colors.slider.track};
       border-radius: 5px;
     }
 
@@ -125,14 +152,15 @@ const Page = (props: PageProps) => {
     }
 
     & .MuiSlider-mark {
-      display: none;
+      display: none;const [color, setColor] = useState<string>(colors.primary);
+
     }
 
     & .MuiSlider-markLabel {
       color: ${colors.text};
       font-size: 14px;
       font-weight: 600;
-      opacity: 0.25;
+      opacity: ${styles.slider.legend.opacity};
     }
 
     & .MuiSlider-thumb {
@@ -156,6 +184,15 @@ const Page = (props: PageProps) => {
         min-height: 100%;
       `}
     >
+      <Helmet>
+        <meta name="theme-color" content={(colors.bg || '').toString()} />
+        <meta
+          name="description"
+          content={`Lightweight SVG/CSS spinners for ${name}`}
+        />
+        <meta property="og:image" content={`${process.env.PUBLIC_URL}/share-${name.toLowerCase()}.png`} />
+        <title>Spinners {name}</title>
+      </Helmet>
       <div
         css={css`
           display: flex;
@@ -190,11 +227,11 @@ const Page = (props: PageProps) => {
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/adexin/spinners-react"
+            href={hrefs.github}
             css={css`
               display: flex;
               align-items: center;
-              color: ${colors.text};
+              color: ${colors.logoText};
               ${linkCss}
             `}
           >
@@ -270,11 +307,15 @@ const Page = (props: PageProps) => {
           {Object.keys(spinners).map((key, i) => {
             const Spinner = spinners[key];
             const props = {
-              ...(still ? { still } : {}),
               color,
               size,
-              speed,
+              speed: debouncedSpeed,
               thickness,
+              ...(still ? { still } : {}),
+              ...(!noSecondaryColorIndexes.includes(i)
+                ? { [isSpinnerWebComponent ? 'secondary-color' : 'secondaryColor']: secondaryColor }
+                : {}
+              ),
             };
 
             return (
@@ -306,6 +347,7 @@ const Page = (props: PageProps) => {
                   ${ selected === i ? `border-color: ${colors.spinners.border};` : '' }
 
                   :hover {
+                    background-color: ${colors.spinners.gridHover};
                     border-color: ${colors.spinners.border};
                   }
                 `}
@@ -350,7 +392,7 @@ const Page = (props: PageProps) => {
               >
                 Size - {size} px
               </div>
-              <div css={css`width: 100%;`}>
+              <div css={css`width: 100%; padding-right: 1px;`}>
                 <Slider
                   css={sliderCss}
                   value={size}
@@ -381,7 +423,7 @@ const Page = (props: PageProps) => {
               >
                 Thickness - {thickness} %
               </div>
-              <div css={css`width: 100%;`}>
+              <div css={css`width: 100%; padding-right: 1px;`}>
                 <Slider
                   css={sliderCss}
                   value={thickness}
@@ -410,29 +452,21 @@ const Page = (props: PageProps) => {
                   font-weight: 600;
                 `}
               >
-                Color -
-                {' '}
-                <span
-                  css={css`
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 6px;
-                    background: ${color};
-                    display: inline-block;
-                    vertical-align: middle;
-                  `}
-                >
-                </span>
+                Speed - {speed} %
               </div>
-              <div
-                css={css`
-                  width: 100%;
-                  padding: 32px 0;
-                `}
-              >
-                <ColorSlider
-                  color={color}
-                  onChange={color => setColor(color.hex)}
+              <div css={css`width: 100%; padding-right: 1px;`}>
+                <Slider
+                  css={sliderCss}
+                  value={speed}
+                  marks={[20, 60, 100, 140, 180].map(value => ({ value, label: `${value} %` }))}
+                  onChange={(e, val) => {
+                    const newSpeed = val as number;
+
+                    setStill(newSpeed !== debouncedSpeed);
+                    setSpeed(newSpeed);
+                  }}
+                  min={20}
+                  max={180}
                 />
               </div>
             </div>
@@ -454,34 +488,181 @@ const Page = (props: PageProps) => {
                   font-weight: 600;
                 `}
               >
-                Speed - {speed} %
-              </div>
-              <div css={css`width: 100%;`}>
-                <Slider
-                  css={sliderCss}
-                  value={speed}
-                  marks={[20, 60, 100, 140, 180].map(value => ({ value, label: `${value} %` }))}
-                  onChange={(e, val) => {
-                    const newSpeed = val as number;
-
-                    setStill(newSpeed !== debouncedSpeed);
-                    setSpeed(newSpeed);
-                  }}
-                  min={20}
-                  max={180}
+                <span css={css`
+                  width: 70px;
+                  white-space: nowrap;
+                  display: inline-block;
+                `}>Color -</span>
+                {' '}
+                <span
+                  onClick={() => setShowMaterialPicker(true)}
+                  css={css`
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                    background: ${color};
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                  `}
                 />
+                { showMaterialPicker
+                  ? (
+                    <div
+                      css={css`
+                        position: absolute;
+                        zIndex: 2;
+                      `}
+                    >
+                      <div
+                        css={css`
+                          position: fixed;
+                          top: 0px;
+                          right: 0px;
+                          bottom: 0px;
+                          left: 0px;
+                          width: 100%;
+                          height: 100%;
+                        `}
+                        onClick={() => setShowMaterialPicker(false)}
+                      />
+                      <MaterialPicker
+                        color={color}
+                        onChange={color => setColor(colorToCss(color.rgb))}
+                      />
+                    </div>
+                  )
+                  : null
+                }
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 20px 0;
+                `}
+              >
+                <ColorSlider
+                  color={color}
+                  onChange={color => setColor(colorToCss(color.rgb))}
+                />
+                <div
+                  css={css`
+                    width: 100%;
+                    padding: 20px 0 0 0;
+                  `}
+                >
+                  <AlphaSlider
+                    color={color}
+                    onChange={color => setColor(colorToCss(color.rgb))}
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              css={css`
+                background ${colors.secondaryBg};
+                display: flex;
+                align-items: center;
+                padding: 0 42px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+              `}
+            >
+              <div
+                css={css`
+                  width: 192px;
+                  flex-shrink: 0;
+                  font-size: 18px;
+                  font-weight: 600;
+                `}
+              >
+                <span css={css`
+                  width: 70px;
+                  white-space: nowrap;
+                  display: inline-block;
+                `}>Color 2 -</span>
+                {' '}
+                <span
+                  onClick={() => setShowMaterialPicker2(true)}
+                  css={css`
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                    background: ${secondaryColor};
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                  `}
+                />
+                { showMaterialPicker2
+                  ? (
+                    <div
+                      css={css`
+                        position: absolute;
+                        zIndex: 2;
+                      `}
+                    >
+                      <div
+                        css={css`
+                          position: fixed;
+                          top: 0px;
+                          right: 0px;
+                          bottom: 0px;
+                          left: 0px;
+                          width: 100%;
+                          height: 100%;
+                        `}
+                        onClick={() => setShowMaterialPicker2(false)}
+                      />
+                      <MaterialPicker
+                        color={color}
+                        onChange={color => setColor(colorToCss(color.rgb))}
+                      />
+                    </div>
+                  )
+                  : null
+                }
+              </div>
+              <div
+                css={css`
+                  width: 100%;
+                  padding: 20px 0;
+                `}
+              >
+                <ColorSlider
+                  color={secondaryColor}
+                  onChange={color => setSecondaryColor(colorToCss(color.rgb))}
+                />
+                <div
+                  css={css`
+                    width: 100%;
+                    padding: 20px 0 0 0;
+                  `}
+                >
+                  <AlphaSlider
+                    color={secondaryColor}
+                    onChange={color => setSecondaryColor(colorToCss(color.rgb))}
+                  />
+                </div>
               </div>
             </div>
           </div>
           <div>
             <textarea
               ref={textareaRef}
-              value={`<${Object.keys(spinners)[selected]} color="${color}" size={${size}} speed={${speed}} thickness={${thickness}} />`}
+              value={usageCode(
+                Object.keys(spinners)[selected],
+                size,
+                thickness,
+                speed,
+                color,
+                noSecondaryColorIndexes.includes(selected) ? undefined : secondaryColor
+              )}
               readOnly
               css={css`
                 resize: none;
                 width: 100%;
-                height: 171px;
+                height: 127px;
                 background ${colors.secondaryBgVariant};
                 border-radius: 15px;
                 color: ${colors.text};
@@ -492,6 +673,7 @@ const Page = (props: PageProps) => {
                 margin-bottom: 10px;
                 font-size: 18px;
                 line-height: 22px;
+                font-family: Lato;
                 :focus {
                   border-color: #9d9d9d;
                 }
