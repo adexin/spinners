@@ -3,6 +3,9 @@ import { CustomPicker } from 'react-color';
 import { Hue } from 'react-color/lib/components/common';
 import { css, jsx } from '@emotion/core';
 
+const defaultSaturation = 50;
+const defaultLightness = 45;
+
 const ColorSlider = CustomPicker(({ hsl, onChange }) => {
   return (
     <div
@@ -10,6 +13,8 @@ const ColorSlider = CustomPicker(({ hsl, onChange }) => {
         position: relative;
         height: 5px;
         width: 100%;
+        left: 3px;
+
 
         & .hue-horizontal {
           border-radius: 5px;
@@ -27,7 +32,11 @@ const ColorSlider = CustomPicker(({ hsl, onChange }) => {
     >
       <Hue
         hsl={hsl}
-        onChange={onChange}
+        onChange={(color: any) => {
+          color.s = defaultSaturation;
+          color.l = defaultLightness;
+          onChange(color);
+        }}
         pointer={() => null} // custom pointer not working on mobile devices
       />
     </div>

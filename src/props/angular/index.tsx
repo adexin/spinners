@@ -1,24 +1,13 @@
 import useScript from 'hooks/useScript';
 
-import {
-  SpinnerCircular,
-  SpinnerCircularFixed,
-  SpinnerCircularSplit,
-  SpinnerInfinity,
-  SpinnerDotted,
-  SpinnerRound,
-  SpinnerRoundOutlined,
-  SpinnerRoundFilled,
-  SpinnerRomb,
-} from 'spinners-react';
-
 export const name = 'Angular';
 
 export const colors = {
   bg: '#f2f5f8',
   secondaryBg: '#e0e6ec',
   secondaryBgVariant: '#e9edf1',
-  text: '#333',
+  logoText: '#333',
+  text: '#2b2b2b',
   primary: '#dd0031',
   slider: {
     track: '#8d949a',
@@ -26,7 +15,9 @@ export const colors = {
   spinners: {
     bg: '#dde3ea',
     grid: '#f3f5f6',
+    gridHover: '#f4f5f5',
     border: '#fff',
+    secondary: '#181818',
   },
 }
 
@@ -38,42 +29,39 @@ export const styles = {
       .angular0 { fill: ${colors.primary}; }
     `,
   ],
+  slider: {
+    legend: {
+      opacity: '0.5',
+    },
+  },
 }
 
-// export const spinners = {
-//   'sa-spinner-circular': 'sa-spinner-circular',
-//   'sa-spinner-circular-fixed': 'sa-spinner-circular-fixed',
-//   'sa-spinner-circular-split': 'sa-spinner-circular-split',
-//   'sa-spinner-round': 'sa-spinner-round',
-//   'sa-spinner-round-outlined': 'sa-spinner-round-outlined',
-//   'sa-spinner-round-filled': 'sa-spinner-round-filled',
-//   'sa-spinner-dotted': 'sa-spinner-dotted',
-//   'sa-spinner-infinity': 'sa-spinner-infinity',
-//   'sa-spinner-romb': 'sa-spinner-romb',
-// };
+export const spinners = [
+  'sa-spinner-circular',
+  'sa-spinner-circular-fixed',
+  'sa-spinner-circular-split',
+  'sa-spinner-round',
+  'sa-spinner-round-outlined',
+  'sa-spinner-round-filled',
+  'sa-spinner-dotted',
+  'sa-spinner-infinity',
+  'sa-spinner-diamond',
+].reduce((acc, name) => ({ ...acc, [name]: name }), {});
 
-export const spinners = {
-  'sa-spinner-circular': SpinnerCircular,
-  'sa-spinner-circular-fixed': SpinnerCircularFixed,
-  'sa-spinner-circular-split': SpinnerCircularSplit,
-  'sa-spinner-round': SpinnerRound,
-  'sa-spinner-round-outlined': SpinnerRoundOutlined,
-  'sa-spinner-round-filled': SpinnerRoundFilled,
-  'sa-spinner-dotted': SpinnerDotted,
-  'sa-spinner-infinity': SpinnerInfinity,
-  'sa-spinner-diamond': SpinnerRomb,
+export const hrefs = {
+  github: 'https://github.com/adexin/spinners-angular'
 };
 
 export const Scripts = () => {
   [
-    // 'https://unpkg.com/spinners-angular/elements/runtime-es5.js',
-    // 'https://unpkg.com/spinners-angular/elements/polyfills-es5.js',
-    // 'https://unpkg.com/spinners-angular/elements/main-es5.js',
-    'http://localhost:4000/assets/runtime-es5.js',
-    'http://localhost:4000/assets/polyfills-es5.js',
-    'http://localhost:4000/assets/main-es5.js',
+    'https://unpkg.com/spinners-angular@0.0.2/elements/runtime-es5.js',
+    'https://unpkg.com/spinners-angular@0.0.2/elements/polyfills-es5.js',
+    'https://unpkg.com/spinners-angular@0.0.2/elements/spinners-es5.js'
   ].map(useScript);
 
   return null;
 }
 
+export const usageCode = (spinner: string, size: number, thickness: number, speed: number, color: string, secondaryColor?: string) => (
+  `<${spinner} [size]="${size}" [thickness]="${thickness}" [speed]="${speed}" color="${color}"${secondaryColor ? ` secondaryColor="${secondaryColor}"` : ''} ></${spinner}>`
+);
