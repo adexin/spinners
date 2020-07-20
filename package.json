@@ -9,9 +9,12 @@
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
+    "@types/react-helmet": "^6.0.0",
     "react": "^16.12.0",
     "react-color": "^2.18.0",
     "react-dom": "^16.12.0",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-share": "^4.0.1",
     "spinners-react": "^1.0.4",
@@ -20,7 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "docs": "rm -rf docs && react-scripts build && mv build docs",
+    "docs": "rm -rf docs && react-scripts build && mv build docs && yarn run docs:entries",
+    "docs:entries": "cp docs/index.html docs/angular.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,6 +50,7 @@
     "@babel/plugin-transform-react-jsx-development": "^7.9.0",
     "@types/react": "^16.9.17",
     "@types/react-color": "^2.17.3",
-    "@types/react-dom": "^16.9.4"
+    "@types/react-dom": "^16.9.4",
+    "@types/react-router-dom": "^5.1.3"
   }
 }

@@ -1,28 +1,30 @@
 {
   "files": {
     "main.css": "/spinners/static/css/main.65a49a9b.chunk.css",
-    "main.js": "/spinners/static/js/main.1cb2403b.chunk.js",
-    "main.js.map": "/spinners/static/js/main.1cb2403b.chunk.js.map",
-    "runtime-main.js": "/spinners/static/js/runtime-main.10ce2327.js",
-    "runtime-main.js.map": "/spinners/static/js/runtime-main.10ce2327.js.map",
-    "static/js/2.f229cc64.chunk.js": "/spinners/static/js/2.f229cc64.chunk.js",
-    "static/js/2.f229cc64.chunk.js.map": "/spinners/static/js/2.f229cc64.chunk.js.map",
+    "main.js": "/spinners/static/js/main.cfa5792c.chunk.js",
+    "main.js.map": "/spinners/static/js/main.cfa5792c.chunk.js.map",
+    "runtime-main.js": "/spinners/static/js/runtime-main.82c28fce.js",
+    "runtime-main.js.map": "/spinners/static/js/runtime-main.82c28fce.js.map",
+    "static/js/2.36b6f86e.chunk.js": "/spinners/static/js/2.36b6f86e.chunk.js",
+    "static/js/2.36b6f86e.chunk.js.map": "/spinners/static/js/2.36b6f86e.chunk.js.map",
     "index.html": "/spinners/index.html",
-    "precache-manifest.23fb00f3f03fd573e7197be871572abb.js": "/spinners/precache-manifest.23fb00f3f03fd573e7197be871572abb.js",
+    "precache-manifest.d7c875f5c748def71f3c8974929dc5ae.js": "/spinners/precache-manifest.d7c875f5c748def71f3c8974929dc5ae.js",
     "service-worker.js": "/spinners/service-worker.js",
     "static/css/main.65a49a9b.chunk.css.map": "/spinners/static/css/main.65a49a9b.chunk.css.map",
-    "static/js/2.f229cc64.chunk.js.LICENSE.txt": "/spinners/static/js/2.f229cc64.chunk.js.LICENSE.txt",
-    "static/media/fb.c829928a.svg": "/spinners/static/media/fb.c829928a.svg",
-    "static/media/github-logo.dd86b04e.svg": "/spinners/static/media/github-logo.dd86b04e.svg",
-    "static/media/github.5500f945.svg": "/spinners/static/media/github.5500f945.svg",
-    "static/media/in.b0d6c0ce.svg": "/spinners/static/media/in.b0d6c0ce.svg",
-    "static/media/logo.1a330a4d.svg": "/spinners/static/media/logo.1a330a4d.svg",
-    "static/media/tw.be28f372.svg": "/spinners/static/media/tw.be28f372.svg"
+    "static/js/2.36b6f86e.chunk.js.LICENSE.txt": "/spinners/static/js/2.36b6f86e.chunk.js.LICENSE.txt",
+    "static/media/angular.c4f6c573.svg": "/spinners/static/media/angular.c4f6c573.svg",
+    "static/media/fb.24eaa5c4.svg": "/spinners/static/media/fb.24eaa5c4.svg",
+    "static/media/github-logo.6251a2e1.svg": "/spinners/static/media/github-logo.6251a2e1.svg",
+    "static/media/github.8cb68050.svg": "/spinners/static/media/github.8cb68050.svg",
+    "static/media/in.65715190.svg": "/spinners/static/media/in.65715190.svg",
+    "static/media/logo.2b622f80.svg": "/spinners/static/media/logo.2b622f80.svg",
+    "static/media/react.0a7ac7d9.svg": "/spinners/static/media/react.0a7ac7d9.svg",
+    "static/media/tw.1ebf08dd.svg": "/spinners/static/media/tw.1ebf08dd.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.10ce2327.js",
-    "static/js/2.f229cc64.chunk.js",
+    "static/js/runtime-main.82c28fce.js",
+    "static/js/2.36b6f86e.chunk.js",
     "static/css/main.65a49a9b.chunk.css",
-    "static/js/main.1cb2403b.chunk.js"
+    "static/js/main.cfa5792c.chunk.js"
   ]
 }
