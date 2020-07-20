@@ -54,9 +54,9 @@ export const hrefs = {
 
 export const Scripts = () => {
   [
-    'https://unpkg.com/spinners-angular@0.0.2/elements/runtime-es5.js',
-    'https://unpkg.com/spinners-angular@0.0.2/elements/polyfills-es5.js',
-    'https://unpkg.com/spinners-angular@0.0.2/elements/spinners-es5.js'
+    'https://unpkg.com/spinners-angular@0.0.3/elements/runtime-es5.js',
+    'https://unpkg.com/spinners-angular@0.0.3/elements/polyfills-es5.js',
+    'https://unpkg.com/spinners-angular@0.0.3/elements/spinners-es5.js'
   ].map(useScript);
 
   return null;

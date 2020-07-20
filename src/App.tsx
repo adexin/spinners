@@ -10,7 +10,7 @@ import * as angularProps from './props/angular';
 import * as reactProps from './props/react';
 
 const App = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <Switch>
       <Route path="/angular">
         <Page tabIndex={1} {...angularProps} />
