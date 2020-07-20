@@ -208,7 +208,7 @@ const Page = (props: PageProps) => {
         >
           <div
             css={css`
-              font-size: 60px;
+              font-size: 40px;
               text-transform: uppercase;
               min-height: 143px;
               display: flex;
@@ -235,9 +235,9 @@ const Page = (props: PageProps) => {
               ${linkCss}
             `}
           >
-            <GithubLogo width="43px" />
+            <GithubLogo width="34px" />
             &nbsp;&nbsp;
-            <GithubText width="75px" />
+            <GithubText width="65px" />
           </a>
         </div>
         <div css={columnCss}>
@@ -269,7 +269,7 @@ const Page = (props: PageProps) => {
               created by 
             </span>
             <a css={linkCss} rel="noopener noreferrer" target="_blank" href="https://adexin.com">
-              <Logo css={css`color: ${colors.text};`} width="182px" />
+              <Logo css={css`color: ${colors.text};`} width="139px" />
             </a>
           </div>
         </div>
@@ -615,8 +615,8 @@ const Page = (props: PageProps) => {
                         onClick={() => setShowMaterialPicker2(false)}
                       />
                       <MaterialPicker
-                        color={color}
-                        onChange={color => setColor(colorToCss(color.rgb))}
+                        color={secondaryColor}
+                        onChange={color => setSecondaryColor(colorToCss(color.rgb))}
                       />
                     </div>
                   )

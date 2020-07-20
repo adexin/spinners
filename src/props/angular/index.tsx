@@ -17,7 +17,7 @@ export const colors = {
     grid: '#f3f5f6',
     gridHover: '#f4f5f5',
     border: '#fff',
-    secondary: '#181818',
+    secondary: 'rgba(24, 24, 24, 0.1)',
   },
 }
 
