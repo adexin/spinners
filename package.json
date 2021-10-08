@@ -17,7 +17,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-share": "^4.0.1",
-    "spinners-react": "^1.0.4",
+    "spinners-react": "^1.0.6",
     "typescript": "~3.7.2"
   },
   "scripts": {
